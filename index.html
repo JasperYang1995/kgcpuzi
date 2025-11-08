@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冰點空調2025科技特賣會</title>
+
+    <!-- 引入 Google Fonts 與 Font Awesome 圖示庫 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            /* --- 亮色系調色盤 --- */
+            --bg-light: #F4F9FF;
+            --panel-light: #FFFFFF;
+            --accent-blue: #007BFF;
+            --accent-passion-orange: #FF5733;
+            --accent-welfare-yellow: #F8C51B;
+            --text-dark: #212529;
+            --text-secondary: #6c757d;
+            --border-color: #DEE2E6;
+            --success-green: #28a745;
+            --font-primary: 'Poppins', 'Noto Sans TC', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-primary);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- 隱私權政策彈窗 --- */
+        #privacy-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        #privacy-modal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .modal-content {
+            background-color: var(--panel-light);
+            border-top: 4px solid var(--accent-blue);
+            border-radius: 12px;
+            padding: 30px 35px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: modal-fade-in 0.6s ease-out;
+        }
+
+        .modal-content h2 {
+            text-align: center;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin: 0 0 20px 0;
+        }
+
+        .terms-box {
+            height: 250px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .terms-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .terms-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .terms-box::-webkit-scrollbar-thumb {
+            background-color: var(--accent-blue);
+            border-radius: 6px;
+        }
+
+        #agree-btn {
+            width: 100%;
+        }
+
+        /* --- 主佈局 --- */
+        .page-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .visual-panel {
+            flex: 1;
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(224, 239, 255, 0.8)), url('https://images.unsplash.com/photo-1616628188581-c916a4f8a7e7?q=80&w=1887&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: var(--text-dark);
+        }
+
+        .visual-panel .logo {
+            max-width: 100%;
+            /* 新增：確保寬度不超過其容器 */
+            max-height: 100px;
+            /* 保留：限制最大高度，避免在桌機版過大 */
+            width: auto;
+            /* 保留：維持圖片的原始長寬比 */
+            height: auto;
+            /* 建議新增：搭配 max-width 使用，避免渲染問題 */
+        }
+
+        .visual-panel .event-info h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: none;
+        }
+
+        .visual-panel .event-info p {
+            font-size: 1.2rem;
+            color: #495057;
+            max-width: 450px;
+        }
+
+        .visual-panel .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .visual-panel .footer-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* --- 右側面板 --- */
+        .form-panel {
+            flex: 1;
+            padding: 50px 60px;
+            background-color: var(--panel-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container,
+        .success-container {
+            width: 100%;
+            max-width: 500px;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .form-container.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .success-container {
+            opacity: 0;
+            transform: scale(1.05);
+            position: absolute;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .success-container.visible {
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+            pointer-events: auto;
+        }
+
+        /* 表單樣式 */
+        .form-container h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .form-container .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group>label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-group .icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 15px 15px 45px;
+            color: var(--text-dark);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        .form-input:focus~.icon {
+            color: var(--accent-blue);
+        }
+
+        .form-input::placeholder {
+            color: #adb5bd;
+        }
+
+        .interest-group label {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--panel-light);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin: 0 10px 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .interest-group label:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .interest-group input {
+            display: none;
+        }
+
+        .interest-group input:checked+span {
+            border-color: var(--accent-blue);
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        .interest-group span {
+            padding: 2px 4px;
+            border-radius: 18px;
+            transition: all 0.3s;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, var(--accent-passion-orange), #FF4500);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3);
+        }
+
+        /* 成功畫面樣式 */
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success-green);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-container h2 {
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+        }
+
+        .success-container p {
+            color: var(--text-secondary);
+            margin: 0 0 2rem 0;
+        }
+
+        .event-details-box {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .event-details-box p {
+            margin: 0 0 10px 0;
+            color: var(--text-dark);
+        }
+
+        .event-details-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .action-buttons .btn .fa-solid {
+            margin-right: 8px;
+        }
+
+        .action-buttons .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .calendar-btn {
+            background: var(--accent-welfare-yellow);
+            color: #1a1a1a;
+            box-shadow: 0 10px 20px rgba(248, 197, 27, 0.2);
+        }
+
+        .coupon-btn {
+            background: var(--accent-blue);
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.25);
+        }
+
+        .share-section {
+            margin-top: 2.5rem;
+        }
+
+        .share-section p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .share-icons a {
+            color: var(--text-secondary);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .share-icons a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* 響應式 */
+        @media (max-width: 1200px) {
+            .page-wrapper {
+                flex-direction: column;
+            }
+
+            .visual-panel {
+                min-height: 50vh;
+            }
+
+            .form-panel {
+                padding: 40px;
+            }
+
+            .visual-panel .event-info h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .visual-panel,
+            .form-panel {
+                padding: 30px;
+            }
+
+            .visual-panel .event-info h1 {
+                font-size: 2rem;
+            }
+
+            .form-container h2,
+            .success-container h2 {
+                font-size: 1.8rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @keyframes modal-fade-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 隱私權政策彈窗 -->
+    <div id="privacy-modal">
+        <div class="modal-content">
+            <h2>隱私權政策與條款</h2>
+            <div class="terms-box">
+                <p>歡迎您參加「冰點空調2025」特賣會。為了提供您完善的活動體驗，我們需要蒐集、處理及利用您的個人資料。請您詳閱以下告知事項：</p>
+                <p><strong>一、蒐集目的：</strong><br>本次活動報名、身份確認、客戶管理、活動聯繫、行銷及後續服務通知等目的。</p>
+                <p><strong>二、個人資料類別：</strong><br>姓名、聯絡電話、電子郵件地址等，以您在表單中所實際填寫的資料為準。</p>
+                <p><strong>三、利用期間、地區、對象及方式：</strong><br>您的資料將僅由本公司於中華民國境內，在活動結束後一年內，以自動化或非自動化方式使用，絕不外洩。</p>
+                <p>若您點擊下方按鈕，即表示您已詳閱並同意上述內容，並同意我們基於上述目的利用您的個人資料。</p>
+            </div>
+            <button id="agree-btn" class="submit-btn">我已閱讀並同意</button>
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- 左側視覺面板 -->
+        <section class="visual-panel">
+            <header>
+                <!-- Logo 已更新為讀取本地檔案 -->
+                <img src="images/bingdian-logo-main.jpg" alt="BINGDIAN Logo" class="logo">
+            </header>
+            <div class="event-info">
+                <h1>冰點・公益<br>Cool Winter x Warm Heart 2025</h1>
+                <p>冰點空調與您一起做公益，共創美好社會。</p>
+            </div>
+            <footer class="footer-links">
+                <a href="https://www.bingdian.com.tw">官方網站</a>
+                <a href="#">隱私權政策</a>
+            </footer>
+        </section>
+
+        <!-- 右側面板 -->
+        <section class="form-panel">
+            <!-- 表單容器 -->
+            <div class="form-container" id="form-container">
+                <h2>冰點空調特賣會暨捐血活動</h2>
+                <p class="subtitle">填寫您的資料，可獲得現金抵用券。</p>
+                <form id="customer-form">
+                    <div class="form-group">
+                        <i class="icon fa-solid fa-user"></i>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="您的全名" required>
+                    </div>
+                    <div class="form-group">
+                        <label>您對哪些活動有興趣？ (可複選)</label>
+                        <div class="interest-group">
+                            <label><input type="checkbox" name="interest"
+                                    value="blood-donation"><span>參加捐血活動</span></label>
+                            <label><input type="checkbox" name="interest"
+                                    value="ac-purchase"><span>購買家用冷氣</span></label>
+                            <label><input type="checkbox" name="interest" value="browsing"><span>隨意逛逛</span></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <i class="icon fa-solid fa-store"></i>
+                        <input type="text" id="dealer_name" name="dealer_name" class="form-input" list="dealer-list"
+                            placeholder="請輸入或選擇您的經銷商">
+                    </div>
+                    <button type="submit" class="submit-btn">確認送出</button>
+                </form>
+            </div>
+
+            <!-- 成功畫面容器 -->
+            <div class="success-container" id="success-container">
+                <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <h2 id="welcome-name">感謝您！</h2>
+                <p>期待在會場與您相見。</p>
+                <div class="event-details-box">
+                    <p><strong>活動時間：</strong><span id="event-time"></span></p>
+                    <p><strong>活動地點：</strong><span id="event-location"></span></p>
+                    <p id="dealer-info-line" style="display: none;"><strong>經銷商：</strong><span
+                            id="dealer-display"></span></p>
+                </div>
+                <!-- 按鈕容器 -->
+                <div class="action-buttons">
+                    <a href="#" id="calendar-link" class="btn calendar-btn" target="_blank" rel="noopener">
+                        <i class="fa-solid fa-calendar-plus"></i> 加入行事曆
+                    </a>
+                    <a href="#" id="download-coupon-btn" class="btn coupon-btn">
+                        <i class="fa-solid fa-ticket"></i> 領取$500抵用券
+                    </a>
+                </div>
+
+                <div class="share-section">
+                    <p>分享給好友：</p>
+                    <div class="share-icons">
+                        <a href="#" id="facebook-share" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
+                        <a href="#" id="line-share" target="_blank"><i class="fa-brands fa-line"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 經銷商資料列表 (for Autocomplete) -->
+    <datalist id="dealer-list">
+        <option value="萬象冷凍設備有限公司"></option>
+        <option value="宏進電器行"></option>
+        <option value="萬家福家電廣場"></option>
+        <option value="樺霖冷氣電器有限公司"></option>
+        <option value="盛宏電器有限公司"></option>
+        <option value="宏盛冷氣裝璜工程有限公司"></option>
+        <option value="樺泰冷凍空調工程有限公司"></option>
+        <option value="新大陸電器有限公司"></option>
+        <option value="全宏電器有限公司"></option>
+        <option value="日昇電器行"></option>
+        <option value="禾豐冷凍空調設備有限公司"></option>
+        <option value="樺興電器行"></option>
+        <option value="欣揚電器有限公司"></option>
+        <option value="新臼井家電有限公司"></option>
+        <option value="盛達電器行"></option>
+        <option value="立陞電器有限公司"></option>
+        <option value="喬元電器行"></option>
+        <option value="瑞豐電器行"></option>
+        <option value="宏騏電器有限公司"></option>
+        <option value="捷寶電器有限公司"></option>
+        <option value="永湛家電有限公司"></option>
+        <option value="上宏電器行"></option>
+        <option value="新苗電器有限公司"></option>
+        <option value="群易電器有限公司"></option>
+        <option value="郁禾家電"></option>
+        <option value="樺慶電器有限公司"></option>
+        <option value="辰光電器行"></option>
+        <option value="文星電器有限公司"></option>
+        <option value="正雲電器有限公司"></option>
+        <option value="大新電器行"></option>
+        <option value="日誠電器有限公司"></option>
+        <option value="巨鼎電器有限公司"></option>
+        <option value="元大電器有限公司"></option>
+        <option value="協成電器行"></option>
+        <option value="冠群電器有限公司"></option>
+        <option value="展加電器有限公司"></option>
+        <option value="永發電器行"></option>
+        <option value="承泰電器有限公司"></option>
+        <option value="鑫冷凍材料行"></option>
+        <option value="富國電器行"></option>
+        <option value="元大電器有限公司"></option>
+        <option value="全泰電器行"></option>
+        <option value="承品科技"></option>
+        <option value="昇平電器行"></option>
+        <option value="雅客家電有限公司"></option>
+        <option value="鑫聲電器行"></option>
+        <option value="信達電器行"></option>
+        <option value="協星電器行"></option>
+    </datalist>
+
+    <!-- 全新橫式抵用券 SVG (隱藏) -->
+    <svg id="coupon-svg" width="850" height="400" style="display: none;" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" font-family="'Noto Sans TC', 'Poppins', sans-serif">
+        <defs>
+            <!-- 濾鏡：柔和的卡片陰影 -->
+            <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="110%">
+                <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#1c2a40" flood-opacity="0.1" />
+            </filter>
+
+            <!-- 漸層：標題下方的裝飾線 -->
+            <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#007BFF" />
+                <stop offset="100%" stop-color="#00BFFF" />
+            </linearGradient>
+
+            <!-- 圖樣：細膩的背景紋理 -->
+            <pattern id="noise-texture" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+                <image
+                    href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNzUiIG51bU9jdGF2ZXM9IjIiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48ZmVDb2xvck1hdHJpeCB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZGHQ9IjMwMCIgZmlsbD0iIzgwgwODAiLz48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg=="
+                    x="0" y="0" width="200" height="200" />
+            </pattern>
+        </defs>
+
+        <!-- 主體容器 -->
+        <g filter="url(#card-shadow)">
+            <!-- 背景底色 -->
+            <rect width="850" height="400" fill="#F8F9FA" rx="16" />
+            <!-- 疊加紋理 -->
+            <rect width="850" height="400" fill="url(#noise-texture)" rx="16" />
+            <!-- 邊框 -->
+            <rect x="0.5" y="0.5" width="849" height="399" fill="none" stroke="#E9ECEF" stroke-width="1" rx="16" />
+        </g>
+
+        <!-- 左側內容 -->
+        <g id="left-pane" transform="translate(60, 60)">
+            <!-- Logo -->
+            <image id="coupon-logo" href="images/bingdian-logo-main.jpg" x="-40" y="-30" height="80" />
+
+            <!-- 標題 -->
+            <text x="-20" y="110" font-size="38" font-weight="700" fill="#212529">現金抵用券</text>
+            <rect x="-20" y="125" width="80" height="5" fill="url(#accent-grad)" rx="2.5" />
+            <text x="-20" y="165" font-size="16" fill="#6c757d" font-family="'Poppins', sans-serif">Cool Winter x Warm
+                Heart 2025</text>
+
+            <!-- 說明文字 -->
+            <text x="-20" y="230" font-size="12" fill="#868E96" font-weight="400" line-height="1.8">
+                <tspan x="-20">・本券可於2025年冰點特賣會現場使用。</tspan>
+                <tspan x="-20" dy="15">・每件商品限用乙張，不得與其他優惠併用。</tspan>
+                <tspan x="-20" dy="15">・本券不得兌換現金或找零。</tspan>
+                <tspan x="-20" dy="15">・主辦單位保留活動最終解釋權。</tspan>
+                <tspan x="-20" dy="15">・僅適用於特定機種，詳情請洽經銷商。</tspan>
+                <tspan x="-20" dy="15">・使用期限至114年12月31日止。</tspan>
+            </text>
+
+            <!-- 隱藏的貴賓名稱欄位，確保 JS 能正常運作 -->
+            <text id="coupon-name" display="none"></text>
+        </g>
+
+        <!-- 分隔虛線 -->
+        <path d="M 430 40 V 360" stroke="#CFD8DC" stroke-width="2" stroke-dasharray="6 6" />
+
+        <!-- 右側內容 -->
+        <g id="right-pane" transform="translate(675, 200)">
+            <!-- 背景同心圓 -->
+            <circle cx="-45" cy="0" r="160" fill="#007BFF" opacity="0.08" />
+            <circle cx="-45" cy="0" r="120" fill="#007BFF" opacity="0.12" />
+
+            <!-- 金額 -->
+            <g>
+                <text x="-45" y="5" font-size="140" font-weight="900" fill="#FF4500" text-anchor="middle"
+                    dominant-baseline="central">500</text>
+                <text x="115" y="20" font-size="54" font-weight="700" fill="#FF4500" text-anchor="start"
+                    dominant-baseline="central">元</text>
+            </g>
+
+            <!-- 條碼 -->
+            <g id="barcode-group" transform="translate(-125, 110)">
+                <text x="200" y="80" font-size="15" fill="#6c757d" text-anchor="middle"
+                    letter-spacing="1">冰點空調冷氣股份有限公司</text>
+            </g>
+        </g>
+    </svg>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- 常數與變數定義 ---
+            const modal = document.getElementById('privacy-modal');
+            const agreeBtn = document.getElementById('agree-btn');
+            const form = document.getElementById('customer-form');
+            const formContainer = document.getElementById('form-container');
+            const successContainer = document.getElementById('success-container');
+            const urlParams = new URLSearchParams(window.location.search);
+            const referralCode = urlParams.get('ref');
+            const downloadCouponBtn = document.getElementById('download-coupon-btn');
+            const eventConfig = { name: "冰點空調2025科技特賣會", startTime: "2025-11-29T09:00:00", endTime: "2025-11-29T17:00:00", location: "台南市山上區新莊59號", description: "預見未來，體驗前所未有的舒適。解鎖業界最新空調科技與獨家優惠。", url: window.location.href };
+
+            // --- 事件監聽 ---
+            agreeBtn.addEventListener('click', () => { modal.classList.add('hidden'); });
+            form.addEventListener('submit', handleFormSubmit);
+            downloadCouponBtn.addEventListener('click', handleDownloadCoupon);
+
+            // --- 初始化 ---
+            if (referralCode) {
+                document.getElementById('dealer_name').value = referralCode;
+            }
+            embedLogoIntoCoupon();
+
+            // --- 函式定義 ---
+
+            function handleFormSubmit(event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                data.interests = formData.getAll('interest');
+                console.log("表單已提交，數據如下：", data);
+                updateSuccessContent(data.name, data.dealer_name);
+                formContainer.classList.add('hidden');
+                successContainer.classList.add('visible');
+            }
+
+            function imageToDataURL(url) {
+                return fetch(url)
+                    .then(response => {
+                        if (!response.ok) throw new Error(`Network response was not ok for ${url}`);
+                        return response.blob();
+                    })
+                    .then(blob => new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(blob);
+                    }));
+            }
+
+            async function embedLogoIntoCoupon() {
+                try {
+                    const logoDataURL = await imageToDataURL('images/bingdian-logo-main.jpg');
+                    const svgNode = document.getElementById('coupon-svg');
+                    const svgImage = svgNode.querySelector('#coupon-logo');
+
+                    // --- 雙重保險 ---
+                    // 同時設定 href 和 xlink:href，確保在所有 SVG 渲染器中都能正確顯示
+                    svgImage.setAttribute('href', logoDataURL);
+                    svgImage.setAttribute('xlink:href', logoDataURL);
+
+                    console.log('Logo (JPG) 已成功嵌入抵用券 SVG 範本。');
+                } catch (error) {
+                    console.error("在頁面載入時嵌入 Logo 失敗:", error);
+                }
+            }
+
+            function updateSuccessContent(userName, dealerName) {
+                document.getElementById('welcome-name').textContent = `感謝您, ${userName}！`;
+                const eventDate = new Date(eventConfig.startTime);
+                const displayTime = `${eventDate.getFullYear()}年${eventDate.getMonth() + 1}月${eventDate.getDate()}日 (${"日一二三四五六".charAt(eventDate.getDay())}) ${eventDate.getHours().toString().padStart(2, '0')}:${eventDate.getMinutes().toString().padStart(2, '0')}`;
+                document.getElementById('event-time').textContent = displayTime;
+                document.getElementById('event-location').textContent = eventConfig.location;
+                const dealerInfoLine = document.getElementById('dealer-info-line');
+                const dealerDisplay = document.getElementById('dealer-display');
+                if (dealerName && dealerName.trim() !== '') {
+                    dealerDisplay.textContent = dealerName;
+                    dealerInfoLine.style.display = 'block';
+                } else {
+                    dealerInfoLine.style.display = 'none';
+                }
+                const googleStartTime = eventConfig.startTime.replace(/[-:]/g, '');
+                const googleEndTime = eventConfig.endTime.replace(/[-:]/g, '');
+                document.getElementById('calendar-link').href = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventConfig.name)}&dates=${googleStartTime}/${googleEndTime}&details=${encodeURIComponent(eventConfig.description)}&location=${encodeURIComponent(eventConfig.location)}`;
+                document.getElementById('facebook-share').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(eventConfig.url)}`;
+                document.getElementById('line-share').href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(eventConfig.url)}`;
+                const couponName = document.getElementById('coupon-name');
+                couponName.textContent = (userName && userName.trim() !== '') ? `貴賓： ${userName}` : '';
+            }
+
+            function handleDownloadCoupon(event) {
+                event.preventDefault();
+                const svgNode = document.getElementById('coupon-svg');
+                const couponNameElement = svgNode.querySelector('#coupon-name');
+                const originalNameText = couponNameElement.textContent; // 儲存原始名稱
+
+                // 為下載的圖片設定通用名稱
+                couponNameElement.textContent = '';
+
+                const svgData = new XMLSerializer().serializeToString(svgNode);
+                const canvas = document.createElement('canvas');
+                const scale = 4;
+                canvas.width = svgNode.width.baseVal.value * scale;
+                canvas.height = svgNode.height.baseVal.value * scale;
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                img.onload = function () {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    URL.revokeObjectURL(url);
+                    const pngUrl = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.download = '冰點空調500元抵用券.png';
+                    link.href = pngUrl;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // 下載後，將SVG中的名稱還原，這樣網頁上顯示的依然是個人化名稱
+                    couponNameElement.textContent = originalNameText;
+                };
+                img.onerror = function () {
+                    console.error("無法載入SVG圖片進行轉換。");
+                    alert("無法產生抵用券，可能是圖片格式問題。");
+                    // 如果發生錯誤，也要還原名稱
+                    couponNameElement.textContent = originalNameText;
+                };
+                img.src = url;
+            }
+        });
+    </script>
+</body>
+
+</html>
